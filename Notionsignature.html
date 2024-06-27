@@ -3,102 +3,86 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487.6">
+  <title>Sketchboard</title>
   <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #121212;
+    }
+    #canvas {
+      border: 2px solid #ccc;
+      background-color: #000;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .button {
+      background-color: #444;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 0 5px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .button:hover {
+      background-color: #888;
+    }
   </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Sketchboard&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 100vh;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #121212;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>#canvas {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #ccc;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #000;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.controls {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.button {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #444;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 5px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 5px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.button:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #888;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;canvas id="canvas" width="600" height="400"&gt;&lt;/canvas&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="controls"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="button" onclick="clearCanvas()"&gt;Clear&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="button" onclick="saveCanvas()"&gt;Save&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const canvas = document.getElementById('canvas');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const ctx = canvas.getContext('2d');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>let drawing = false;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>canvas.addEventListener('mousedown', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>drawing = true;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>canvas.addEventListener('mouseup', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>drawing = false;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.beginPath();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>canvas.addEventListener('mousemove', draw);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function draw(event) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (!drawing) return;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.lineWidth = 5;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.lineCap = 'round';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.strokeStyle = 'white';</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.stroke();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.beginPath();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function clearCanvas() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>ctx.clearRect(0, 0, canvas.width, canvas.height);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function saveCanvas() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const dataURL = canvas.toDataURL('image/png');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const link = document.createElement('a');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>link.href = dataURL;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>link.download = 'signature.png';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>link.click();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+  <div>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <div class="controls">
+      <button class="button" onclick="clearCanvas()">Clear</button>
+      <button class="button" onclick="saveCanvas()">Save</button>
+    </div>
+  </div>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+
+    canvas.addEventListener('mousedown', () => {
+      drawing = true;
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      drawing = false;
+      ctx.beginPath();
+    });
+
+    canvas.addEventListener('mousemove', draw);
+
+    function draw(event) {
+      if (!drawing) return;
+      ctx.lineWidth = 5;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = 'white';
+
+      ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+    }
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function saveCanvas() {
+      const dataURL = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = dataURL;
+      link.download = 'signature.png';
+      link.click();
+    }
+  </script>
 </body>
 </html>
